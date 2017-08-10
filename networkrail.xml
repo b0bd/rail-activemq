@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://camel.apache.org/schema/spring
+                           http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <camelContext streamCache="true" xmlns="http://camel.apache.org/schema/spring" id="camel-networkrail"/>
+
+    <bean id="networkrail" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="brokerURL" value="tcp://datafeeds.networkrail.co.uk:61619"/>
+        <property name="userName" value="[USERNAME]"/>
+        <property name="password" value="[PASSWORD]"/>
+    </bean>
+</beans>

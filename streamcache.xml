@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+    <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <!-- define a bean of type StreamCachingStrategy which CamelContext will automatic use -->
+    <bean id="streamStrategy" class="org.apache.camel.impl.DefaultStreamCachingStrategy">
+      <property name="spoolDirectory" value="/tmp/cachedir"/>
+      <property name="spoolThreshold" value="65536"/>
+      <property name="bufferSize" value="16384"/>
+    </bean>
+</beans>
