@@ -1,4 +1,4 @@
-rail_activemq
+rail-activemq
 =============
 
 - [Introduction](#introduction)
@@ -11,6 +11,8 @@ rail_activemq
 - [JMX](#JMX)
 - [Security](#Security)
 - [Final Notes](#Final Notes)
+
+
 # Introduction
 
 ActiveMQ configured with connectors to bridge Network Rail Enquiries or National Rail real-time data feeds as described by [Open Rail Data Wiki - Advanced Uses](http://nrodwiki.rockshore.net/index.php/Advanced_Uses) and provide those feeds locally. 
@@ -21,7 +23,7 @@ The container also supports connecting to both the NRE and Network Rail feeds si
 
 To bridge the National Rail Enquiries Darwin feed to a local topic named nationalrail, and expose it locally by STOMP on port 61613:
 ```bash
-docker run -e NATIONALRAIL_QUEUE=<queue-id> -p 61613:61613 b0bd/rail_activemq
+docker run -e NATIONALRAIL_QUEUE=<queue-id> -p 61613:61613 b0bd/rail-activemq
 ```
 
 To bridge the TRAIN_MVT_ALL_TOC feed from Network Rail, and expose it locally by STOMP on port 61613:
@@ -29,7 +31,7 @@ To bridge the TRAIN_MVT_ALL_TOC feed from Network Rail, and expose it locally by
 docker run -e NETWORKRAIL_USERNAME=<networkrail-username> \
            -e NETWORKRAIL_PASSWORD=<networkrail-password> \
            -e NETWORKRAIL_TOPICS=TRAIN_MVT_ALL_TOC        \
-           -p 61613:61613 b0bd/rail_activemq
+           -p 61613:61613 b0bd/rail-activemq
 ```
 # National Rail Enquiries Subscriber
 
