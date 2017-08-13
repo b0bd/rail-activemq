@@ -6,11 +6,16 @@
                            http://camel.apache.org/schema/spring
                            http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-    <camelContext streamCache="true" xmlns="http://camel.apache.org/schema/spring" id="camel-nationalrail"/>
-
     <bean id="nationalrail" class="org.apache.activemq.camel.component.ActiveMQComponent">
         <property name="brokerURL" value="tcp://datafeeds.nationalrail.co.uk:61616"/>
         <property name="userName" value="[USERNAME]"/>
         <property name="password" value="[PASSWORD]"/>
     </bean>
+
+    <camelContext streamCache="true" xmlns="http://camel.apache.org/schema/spring" id="camel-nationalrail">
+        <route>
+            <from uri="nationalrail:queue:[QUEUE]"/>
+            <to   uri="amq:topic:nationalrail"/>
+        </route>
+    </camelContext>
 </beans>

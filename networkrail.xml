@@ -6,11 +6,14 @@
                            http://camel.apache.org/schema/spring
                            http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-    <camelContext streamCache="true" xmlns="http://camel.apache.org/schema/spring" id="camel-networkrail"/>
 
     <bean id="networkrail" class="org.apache.activemq.camel.component.ActiveMQComponent">
         <property name="brokerURL" value="tcp://datafeeds.networkrail.co.uk:61619"/>
         <property name="userName" value="[USERNAME]"/>
         <property name="password" value="[PASSWORD]"/>
     </bean>
+
+    <camelContext streamCache="true" xmlns="http://camel.apache.org/schema/spring" id="camel-networkrail">
+        <!-- route tags are inserted here to configure networkrail-topics, do not change to <camelContext/>-->
+    </camelContext>
 </beans>

@@ -52,14 +52,10 @@ else
 
     cp /srv/activemq/conf/nationalrail.xml.template /srv/activemq/conf/nationalrail.xml
     sed -i \
-        -e "s#\[USERNAME\]#${NATIONALRAIL_USERNAME}#" \
-        -e "s#\[PASSWORD\]#${NATIONALRAIL_PASSWORD}#" \
+        -e "s#\[USERNAME\]#${NATIONALRAIL_USERNAME}#"   \
+        -e "s#\[PASSWORD\]#${NATIONALRAIL_PASSWORD}#"   \
+        -e "s#\[QUEUE\]#${NATIONALRAIL_QUEUE}#"         \
         /srv/activemq/conf/nationalrail.xml
-
-    TOPIC=nationalrail
-    new_route='        <route>\n            <from uri="nationalrail:queue:NATIONALRAIL_QUEUE" />\n            <to uri="amq:topic:TOPIC" />\n        </route>\n'
-    sed -i -e "s#^    </camelContext>\$#${new_route}\n    </camelContext>#" /srv/activemq/conf/nationalrail.xml
-    sed -i -e s#NATIONALRAIL_QUEUE#${NATIONALRAIL_QUEUE}# -e s#TOPIC#${TOPIC}# /srv/activemq/conf/nationalrail.xml
 fi
 
 # configure HAWTIO
