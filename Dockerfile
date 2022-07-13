@@ -1,7 +1,7 @@
 FROM openjdk:8-jre-alpine
 
-ENV 	V=5.15.0	\
-	HAWTIO=1.5.2
+ENV 	V=5.15.11	\
+	HAWTIO=1.5.11
 
 RUN apk --no-cache add openssl
 
@@ -20,20 +20,20 @@ RUN mkdir /srv/hawtio						\
  && ln -s hawtio-default-offline-${HAWTIO}.war /srv/hawtio/hawtio-default-offline.war
 
 RUN echo "" >> "/srv/apache-activemq-${V}/bin/env"	\
- && echo 'ACTIVEMQ_OPTS="$ACTIVEMQ_OPTS -Dhawtio.realm=activemq -Dhawtio.role=admins -Dhawtio.rolePrincipalClasses=org.apache.activemq.jaas.GroupPrincipal"'	\
+ && echo 'ACTIVEMQ_OPTS="$ACTIVEMQ_OPTS -Dhawtio.authenticationEnabled=false"'	\
 	>> "/srv/apache-activemq-${V}/bin/env"
 
-RUN echo 'ACTIVEMQ_OPTS="$ACTIVEMQ_OPTS -Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"'	>> "/srv/apache-activemq-${V}/bin/env"
+RUN echo 'ACTIVEMQ_OPTS="$ACTIVEMQ_OPTS -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"'	>> "/srv/apache-activemq-${V}/bin/env"
 
-COPY networkrail.xml  /srv/activemq/conf/networkrail.xml.template
-COPY nationalrail.xml /srv/activemq/conf/nationalrail.xml.template
-COPY streamcache.xml  /srv/activemq/conf/streamcache.xml
-COPY localbroker.xml  /srv/activemq/conf/localbroker.xml
+COPY topic_template.xml /srv/activemq/conf/topic.xml.template
+COPY streamcache.xml    /srv/activemq/conf/streamcache.xml
+COPY localbroker.xml    /srv/activemq/conf/localbroker.xml
 COPY init.sh /
 RUN chmod +x /init.sh
 
 ENV NETWORKRAIL_USERNAME= NETWORKRAIL_PASSWORD= NETWORKRAIL_TOPICS=
-ENV NATIONALRAIL_USERNAME=d3user NATIONALRAIL_PASSWORD=d3password NATIONALRAIL_QUEUE=
+ENV DARWIN_USERNAME= DARWIN_PASSWORD= DARWIN_HOST= DARWIN_TOPICS=
+ENV NR_KB_USERNAME= NR_KB_PASSWORD= NR_KB_HOST= NR_KB_TOPICS=
 
 VOLUME /srv/activemq/data
 
