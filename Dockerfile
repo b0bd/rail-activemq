@@ -1,6 +1,6 @@
 FROM openjdk:8-jre-alpine
 
-ENV 	V=5.15.11	\
+ENV 	V=5.16.5	\
 	HAWTIO=1.5.11
 
 RUN apk --no-cache add openssl
