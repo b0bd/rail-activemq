@@ -23,11 +23,16 @@ RUN echo "" >> "/srv/apache-activemq-${V}/bin/env"	\
  && echo 'ACTIVEMQ_OPTS="$ACTIVEMQ_OPTS -Dhawtio.authenticationEnabled=false"'	\
 	>> "/srv/apache-activemq-${V}/bin/env"
 
-RUN echo 'ACTIVEMQ_OPTS="$ACTIVEMQ_OPTS -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"'	>> "/srv/apache-activemq-${V}/bin/env"
+RUN echo 'ACTIVEMQ_OPTS="$ACTIVEMQ_OPTS -javaagent:/srv/jmx-prom/agent.jar=9191:/srv/jmx-prom/config.yaml -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"'	>> "/srv/apache-activemq-${V}/bin/env"
 
 COPY topic_template.xml /srv/activemq/conf/topic.xml.template
 COPY streamcache.xml    /srv/activemq/conf/streamcache.xml
 COPY localbroker.xml    /srv/activemq/conf/localbroker.xml
+
+RUN mkdir /srv/jmx-prom
+COPY prom-agent.yaml  /srv/jmx-prom/config.yaml
+RUN wget -O /srv/jmx-prom/agent.jar \
+  https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.17.2/jmx_prometheus_javaagent-0.17.2.jar
 COPY init.sh /
 RUN chmod +x /init.sh
 
@@ -37,7 +42,7 @@ ENV NR_KB_USERNAME= NR_KB_PASSWORD= NR_KB_HOST= NR_KB_TOPICS=
 
 VOLUME /srv/activemq/data
 
-EXPOSE 1099 5672 8161 1883 61613 61614 61616
+EXPOSE 1099 5672 8161 1883 61613 61614 61616 9191
 
 CMD ["/init.sh"]
 

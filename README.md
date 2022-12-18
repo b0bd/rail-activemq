@@ -65,6 +65,10 @@ More information on the Network Rail feeds is available at [Open Rail Data Feeds
 * 61614 - WebSocket
 * 61616 - Openwire
 
+# Prometheus Exporter
+
+* Prometheus metrics are available on port 9191 and url `/metrics`
+
 # Web Console
 
 * The ActiveMQ console is available on port 8161
