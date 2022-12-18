@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine
+FROM eclipse-temurin:8-jre-alpine
 
 ENV 	V=5.16.5	\
 	HAWTIO=1.5.11
@@ -42,7 +42,7 @@ ENV NR_KB_USERNAME= NR_KB_PASSWORD= NR_KB_HOST= NR_KB_TOPICS=
 
 VOLUME /srv/activemq/data
 
-EXPOSE 1099 5672 8161 1883 61613 61614 61616 9191
+EXPOSE 1099 1883 5672 8161 9191 61613 61614 61616
 
 CMD ["/init.sh"]
 
