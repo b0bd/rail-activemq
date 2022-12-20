@@ -35,13 +35,27 @@ docker run -e NETWORKRAIL_USERNAME=<networkrail-username> \
 ```
 # National Rail Enquiries Subscriber
 
-To subscribe to the National Rail Darwin feeds, first create an account at [National Rail Enquiries](https://datafeeds.nationalrail.co.uk).
+To subscribe to the National Rail feeds, first create an account at [National Rail Enquiries](https://opendata.nationalrail.co.uk).
 
-To configure the subscriber, set the environment variable `NATIONALRAIL_QUEUE` to the queue name shown on the the Real Time Feed section on the My Feeds tab.
+More information on the National Rail Darwin feeds is available at [Open Rail Data Feeds - NRE Feeds](https://wiki.openraildata.com/index.php?title=About_the_National_Rail_Feeds)
 
-This will create a local topic `nationalrail` in ActiveMQ that will bridge the remote queue.  Note that if you have existing code that connects to datafeeds.nationalrail.co.uk you will need to modify the code to subscribe to the nationalrail topic instead of a queue.
+## Darwin
+To configure the Darwin subscriber, set the environment variables `DARWIN_USERNAME` and `DARWIN_PASSWORD` to the information
+showing for Darwin Topic information shown on the "My Feeds" tab.
 
-More information on the National Rail Darwin feeds is available at [Open Rail Data Feeds - NRE Feeds](http://nrodwiki.rockshore.net/index.php/About_the_NRE_Feeds)
+To select the topics to bridge from Darwin, set the the environment variable `DARWIN_TOPICS` to a comma seperated list of the 
+required topics. 
+
+As a shortcut, setting `DARWIN_TOPICS=ALL` is equivalent to setting `DARWIN_TOPICS="darwin.pushport-v16,darwin.status"`
+
+## Knowledgebase Real Time
+To configure the Knowledgebase subscriber, set the environment variables `NR_KB_USERNAME` and `NR_KB_PASSWORD` to the
+information showing for Knowledgebase Topic information shown on the "My Feeds" tab.
+
+To select the topics to bridge from Knowledgebase, set the the environment variable `NR_KB_TOPICS` to a comma seperated list of the required topics. 
+
+As a shortcut, setting `NR_KB_TOPICS=ALL` is equivalent to setting `NR_KB_TOPICS="kb.incidents"`
+
 
 # Network Rail Subscriber
 
@@ -55,7 +69,7 @@ As a shortcut, setting `NETWORKRAIL_TOPICS=ALL` is equivalent to setting `NETWOR
 
 Be sure to select the feeds to mirror under the My Feeds tab in the Network Rail account.
 
-More information on the Network Rail feeds is available at [Open Rail Data Feeds - Network Rail Feeds](http://nrodwiki.rockshore.net/index.php/About_the_feeds)
+More information on the Network Rail feeds is available at [Open Rail Data Feeds - Network Rail Feeds](https://wiki.openraildata.com/index.php?title=About_the_Network_Rail_feeds)
 
 # Available Protocols
 
