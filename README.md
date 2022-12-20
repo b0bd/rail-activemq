@@ -2,15 +2,15 @@ rail-activemq
 =============
 
 - [Introduction](#introduction)
-- [Quick Start](#Quick Start)
-- [Subscribers](#National Rail Subscription)
-  - [National Rail Enquiries (Darwin)](#National Rail Enquiries Subscriber)
-  - [Network Rail](#Network Rail Subscriber)
-- [Available Protocols](#Available Protocols)
-- [Web Console](#Web Console)  
-- [JMX](#JMX)
-- [Security](#Security)
-- [Final Notes](#Final Notes)
+- [Quick Start](#quick-start)
+- [Subscribers](#national-rail-subscription)
+  - [National Rail](#national-rail-subcriber)
+  - [Network Rail](#network-rail-subscriber)
+- [Available Protocols](#available-protocols)
+- [Web Console](#web-console)  
+- [JMX](#jmx)
+- [Security](#security)
+- [Final Notes](#final-notes)
 
 
 # Introduction
@@ -33,7 +33,7 @@ docker run -e NETWORKRAIL_USERNAME=<networkrail-username> \
            -e NETWORKRAIL_TOPICS=TRAIN_MVT_ALL_TOC        \
            -p 61613:61613 b0bd/rail-activemq
 ```
-# National Rail Enquiries Subscriber
+# National Rail Subscriber
 
 To subscribe to the National Rail feeds, first create an account at [National Rail Enquiries](https://opendata.nationalrail.co.uk).
 
