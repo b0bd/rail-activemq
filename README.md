@@ -22,11 +22,6 @@ The container also supports connecting to both the NRE and Network Rail feeds si
 
 # Quick Start
 
-To bridge the National Rail Enquiries Darwin feed to a local topic named nationalrail, and expose it locally by STOMP on port 61613:
-```bash
-docker run -e NATIONALRAIL_QUEUE=<queue-id> -p 61613:61613 b0bd/rail-activemq
-```
-
 To bridge the TRAIN_MVT_ALL_TOC feed from Network Rail, and expose it locally by STOMP on port 61613:
 ```bash
 docker run -e NETWORKRAIL_USERNAME=<networkrail-username> \
